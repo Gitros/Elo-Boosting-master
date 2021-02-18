@@ -592,14 +592,14 @@ small {
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #548b87;
-  border-color: #4f837f;
+  background-color: #1c246e;
+  border-color: #1c246e;
 }
 .btn-primary:focus {
   color: #fff;
-  background-color: #548b87;
-  border-color: #4f837f;
-  box-shadow: 0 0 0 0.2rem rgba(123, 175, 172, 0.5);
+  background-color: #1c246e;
+  border-color: #1c246e;
+  box-shadow: 0 0 0 0.2rem rgba(20, 17, 175, 0.5);
 }
 .btn-primary:disabled {
   color: #fff;
@@ -1997,8 +1997,8 @@ body {
     padding: 0;
   }
   .masthead h1 {
-    font-size: 6.5rem;
-    line-height: 6.5rem;
+    font-size: 5rem;
+    line-height: 5rem;
     letter-spacing: 0.8rem;
   }
   .masthead h2 {
@@ -2007,14 +2007,20 @@ body {
   }
 }
 .about-section {
+  height: 40%;
+  min-height: 50vh;
   padding: 15rem;
-  background: rgba(18, 66, 156, 0.87);
+  background-image: url(../assets/img/tloabout.png);
+  background-repeat: no-repeat;
 }
 .about-section h2 {
   font-size: 3rem;
   font-weight: 700;
 }
 .about-section p {
+  height: 40%;
+  text-align: left;
+  padding: 3em 3em;
   margin-bottom: 5rem;
   font-size: 1.5rem;
 }
@@ -2178,7 +2184,7 @@ body {
 }
 .elo_boosting_form option:hover {
   outline: unset;
-  background-color: #291dcebb;
+  background-color: #195792;
 }
 .elo_boosting_form option:checked {
   background-color: #291dcebb;
@@ -2203,7 +2209,7 @@ body {
 }
 .elo_boosting_form .button_box button {
   padding: 0.5em 4em;
-  background-color: rgba(38, 41, 216, 0.788);
+  background-color: rgba(38, 93, 175, 0.788);
   color: #fff;
   border: unset;
   font-size: 1.1rem;
