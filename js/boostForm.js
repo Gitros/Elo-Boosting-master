@@ -10,7 +10,7 @@ const EndDivisionSelectValue = document.getElementById("endDivisionSelectValue")
 const LessLPElement = document.getElementById("lessLP");
 
 
-const LessLPModifier = 30;
+const LessLPModifier = 15;
 const IronDivPrice = 15;
 const IronDivPromoPrice = 20;
 const BronzeDivPrice = 18;
@@ -21,10 +21,10 @@ const GoldDivPrice = 34;
 const GoldDivPromoPrice = 40;
 const PlatinumDivPrice = 45;
 const PlatinumDivPromoPrice = 75;
-const D4D3Price = 120;
-const D3D2Price = 150;
-const D2D1Price = 170;
-const MasterPrice = 320;
+const D4D3Price = 100;
+const D3D2Price = 130;
+const D2D1Price = 150;
+const MasterPrice = 300;
 
 
 const reEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -97,9 +97,20 @@ const calculatePrice = () =>{
 
     }
 
-    if(startDivisionTypeSelected > endDivisionTypeSelected || (startDivisionTypeSelected == endDivisionTypeSelected && endDivisionValueSelected > startDivisionValueSelected )){
+    console.log(startDivisionValueSelected + "|" +  endDivisionTypeSelected + "|" + startDivisionValueSelected + "|" + endDivisionValueSelected);
+    console.log(startDivisionTypeSelected == endDivisionTypeSelected && endDivisionValueSelected < startDivisionValueSelected);
+    console.log(startDivisionTypeSelected == endDivisionTypeSelected);
+    console.log(endDivisionValueSelected < startDivisionValueSelected);
+
+
+
+    if(startDivisionTypeSelected > endDivisionTypeSelected){
         PriceDisplay.innerHTML = "0 ZŁ";
-        
+        return 0;
+    }
+    else if(startDivisionTypeSelected == endDivisionTypeSelected && endDivisionValueSelected >= startDivisionValueSelected){
+        PriceDisplay.innerHTML = "0 ZŁ";
+        return 0;
     }
     else{
         switch(startDivisionTypeSelected){
@@ -113,393 +124,386 @@ const calculatePrice = () =>{
                         return price;
                     }
                     case 2:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        if(endDivisionValueSelected != 4){
-                            price += (4 - endDivisionValueSelected) * BronzeDivPrice;
-                        }
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
+                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice)
+                        price += ((4 - endDivisionValueSelected) * BronzeDivPrice);
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 3:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        
-                        if(endDivisionValueSelected != 4){
-                            price += (endDivisionValueSelected - 1) * SilverDivPrice;
-                        }
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
+                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice)
+                        price += BronzeDivPromoPrice + (BronzeDivPrice * 3);
+                        price += ((4 - endDivisionValueSelected) * SilverDivPrice);
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 4:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
+                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice)
+                        price += BronzeDivPromoPrice + (BronzeDivPrice * 3);
+                        price += SilverDivPromoPrice + (SilverDivPrice * 3);
+                        price += ((4 - endDivisionValueSelected) * GoldDivPrice);
 
-                        if(endDivisionValueSelected != 4){
-                            price += (endDivisionValueSelected - 1) * GoldDivPrice;
-                        }
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 5:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
+                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice)
+                        price += BronzeDivPromoPrice + (BronzeDivPrice * 3);
+                        price += SilverDivPromoPrice + (SilverDivPrice * 3);
+                        price += GoldDivPromoPrice + (GoldDivPrice * 3);
+                        price += ((4 - endDivisionValueSelected) * PlatinumDivPrice);
 
-                        if(endDivisionValueSelected != 1){
-                            price += (endDivisionValueSelected - 4) * PlatinumDivPrice;
-                        }
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 6:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
-                        price += PlatinumDivPromoPrice + (3 * PlatinumDivPrice);
+                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice)
+                        price += BronzeDivPromoPrice + (BronzeDivPrice * 3);
+                        price += SilverDivPromoPrice + (SilverDivPrice * 3);
+                        price += GoldDivPromoPrice + (GoldDivPrice * 3);
+                        price += PlatinumDivPromoPrice + (PlatinumDivPrice * 3);
 
-                        if(endDivisionValueSelected != 4){
-                            if(endDivisionValueSelected === 3) {price += D4D3Price;}
-                            if(endDivisionValueSelected === 2) {price += D4D3Price + D3D2Price;}
-                            if(endDivisionValueSelected === 1) {price += D4D3Price + D3D2Price + D2D1Price;}
+                        switch(endDivisionValueSelected){
+                            case 4:{
+                                price += 0;
+                                break;
+                            }
+                            case 3:{
+                                price += D4D3Price;
+                                break;
+                            }
+                            case 2:{
+                                price += D4D3Price + D3D2Price;
+                            }
+                            case 1:{
+                                price += D4D3Price + D3D2Price + D2D1Price;
+                            }
                         }
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 7:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
-                        price += PlatinumDivPromoPrice + (3 * PlatinumDivPrice);
+                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice)
+                        price += BronzeDivPromoPrice + (BronzeDivPrice * 3);
+                        price += SilverDivPromoPrice + (SilverDivPrice * 3);
+                        price += GoldDivPromoPrice + (GoldDivPrice * 3);
+                        price += PlatinumDivPromoPrice + (PlatinumDivPrice * 3);
                         price += D4D3Price + D3D2Price + D2D1Price;
                         price += MasterPrice;
+
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
-                        
-                        document.getElementById("endDivisionSelectValue").style.display = "none";
-
                         return price;
                     }
                 }
-                break;
             }
             case 2:{
                 switch(endDivisionTypeSelected){
                     case 2:{
-                        if(endDivisionValueSelected != 4){
-                            price += (4 - endDivisionValueSelected) * BronzeDivPrice;
-                        }
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
+                        price = (startDivisionValueSelected - endDivisionValueSelected) * BronzeDivPrice;
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 3:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        
-                        if(endDivisionValueSelected != 4){
-                            price += (endDivisionValueSelected - 1) * SilverDivPrice;
-                        }
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
+                        price = BronzeDivPromoPrice + ((startDivisionValueSelected - 1) * BronzeDivPrice)
+                        price += ((4 - endDivisionValueSelected) * SilverDivPrice);
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 4:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
+                        price = BronzeDivPromoPrice + ((startDivisionValueSelected - 1) * BronzeDivPrice)
+                        price += SilverDivPromoPrice + (SilverDivPrice * 3);
+                        price += ((4 - endDivisionValueSelected) * GoldDivPrice);
 
-                        if(endDivisionValueSelected != 4){
-                            price += (endDivisionValueSelected - 1) * GoldDivPrice;
-                        }
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 5:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
+                        price = BronzeDivPromoPrice + ((startDivisionValueSelected - 1) * BronzeDivPrice)
+                        price += SilverDivPromoPrice + (SilverDivPrice * 3);
+                        price += GoldDivPromoPrice + (GoldDivPrice * 3);
+                        price += ((4 - endDivisionValueSelected) * PlatinumDivPrice);
 
-                        if(endDivisionValueSelected != 1){
-                            price += (endDivisionValueSelected - 4) * PlatinumDivPrice;
-                        }
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 6:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
-                        price += PlatinumDivPromoPrice + (3 * PlatinumDivPrice);
+                        price = BronzeDivPromoPrice + ((startDivisionValueSelected - 1) * BronzeDivPrice)
+                        price += SilverDivPromoPrice + (SilverDivPrice * 3);
+                        price += GoldDivPromoPrice + (GoldDivPrice * 3);
+                        price += PlatinumDivPromoPrice + (PlatinumDivPrice * 3);
 
-                        if(endDivisionValueSelected != 4){
-                            if(endDivisionValueSelected === 3) {price += D4D3Price;}
-                            if(endDivisionValueSelected === 2) {price += D4D3Price + D3D2Price;}
-                            if(endDivisionValueSelected === 1) {price += D4D3Price + D3D2Price + D2D1Price;}
+                        switch(endDivisionValueSelected){
+                            case 4:{
+                                price += 0;
+                                break;
+                            }
+                            case 3:{
+                                price += D4D3Price;
+                                break;
+                            }
+                            case 2:{
+                                price += D4D3Price + D3D2Price;
+                            }
+                            case 1:{
+                                price += D4D3Price + D3D2Price + D2D1Price;
+                            }
                         }
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 7:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
-                        price += PlatinumDivPromoPrice + (3 * PlatinumDivPrice);
+                        price = BronzeDivPromoPrice + ((startDivisionValueSelected - 1) * BronzeDivPrice)
+                        price += SilverDivPromoPrice + (SilverDivPrice * 3);
+                        price += GoldDivPromoPrice + (GoldDivPrice * 3);
+                        price += PlatinumDivPromoPrice + (PlatinumDivPrice * 3);
                         price += D4D3Price + D3D2Price + D2D1Price;
                         price += MasterPrice;
+
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
-                        
-                        document.getElementById("endDivisionSelectValue").style.display = "none";
-
                         return price;
                     }
                 }
-                break;
             }
             case 3:{
                 switch(endDivisionTypeSelected){
                     case 3:{
-                        if(endDivisionValueSelected != 4){
-                            price += (endDivisionValueSelected - 1) * SilverDivPrice;
-                        }
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
+                        price = (startDivisionValueSelected - endDivisionValueSelected) * SilverDivPrice;
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 4:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
+                        price = SilverDivPromoPrice + ((startDivisionValueSelected - 1) * SilverDivPrice)
+                        price += ((4 - endDivisionValueSelected) * GoldDivPrice);
 
-                        if(endDivisionValueSelected != 4){
-                            price += (endDivisionValueSelected - 1) * GoldDivPrice;
-                        }
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 5:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
+                        price = SilverDivPromoPrice + ((startDivisionValueSelected - 1) * SilverDivPrice)
+                        price += GoldDivPromoPrice + (GoldDivPrice * 3);
+                        price += ((4 - endDivisionValueSelected) * PlatinumDivPrice);
 
-                        if(endDivisionValueSelected != 1){
-                            price += (endDivisionValueSelected - 4) * PlatinumDivPrice;
-                        }
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 6:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
-                        price += PlatinumDivPromoPrice + (3 * PlatinumDivPrice);
+                        price = SilverDivPromoPrice + ((startDivisionValueSelected - 1) * SilverDivPrice)
+                        price += GoldDivPromoPrice + (GoldDivPrice * 3);
+                        price += PlatinumDivPromoPrice + (PlatinumDivPrice * 3);
 
-                        if(endDivisionValueSelected != 4){
-                            if(endDivisionValueSelected === 3) {price += D4D3Price;}
-                            if(endDivisionValueSelected === 2) {price += D4D3Price + D3D2Price;}
-                            if(endDivisionValueSelected === 1) {price += D4D3Price + D3D2Price + D2D1Price;}
+                        switch(endDivisionValueSelected){
+                            case 4:{
+                                price += 0;
+                                break;
+                            }
+                            case 3:{
+                                price += D4D3Price;
+                                break;
+                            }
+                            case 2:{
+                                price += D4D3Price + D3D2Price;
+                            }
+                            case 1:{
+                                price += D4D3Price + D3D2Price + D2D1Price;
+                            }
                         }
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 7:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
-                        price += PlatinumDivPromoPrice + (3 * PlatinumDivPrice);
+                        price = SilverDivPromoPrice + ((startDivisionValueSelected - 1) * SilverDivPrice)
+                        price += GoldDivPromoPrice + (GoldDivPrice * 3);
+                        price += PlatinumDivPromoPrice + (PlatinumDivPrice * 3);
                         price += D4D3Price + D3D2Price + D2D1Price;
                         price += MasterPrice;
+
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
-                        
-                        document.getElementById("endDivisionSelectValue").style.display = "none";
-
                         return price;
                     }
                 }
-                break;
             }
             case 4:{
                 switch(endDivisionTypeSelected){
                     case 4:{
-                        if(endDivisionValueSelected != 4){
-                            price += (endDivisionValueSelected - 1) * GoldDivPrice;
-                        }
+                        price = (startDivisionValueSelected - endDivisionValueSelected) * GoldDivPrice;
+    
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 5:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
+                        price = GoldDivPromoPrice + ((startDivisionValueSelected - 1) * GoldDivPrice)
+                        price += ((4 - endDivisionValueSelected) * PlatinumDivPrice);
 
-                        if(endDivisionValueSelected != 1){
-                            price += (endDivisionValueSelected - 4) * PlatinumDivPrice;
-                        }
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 6:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
-                        price += PlatinumDivPromoPrice + (3 * PlatinumDivPrice);
+                        price = GoldDivPromoPrice + ((startDivisionValueSelected - 1) * GoldDivPrice)
+                        price += PlatinumDivPromoPrice + (PlatinumDivPrice * 3);
 
-                        if(endDivisionValueSelected != 4){
-                            if(endDivisionValueSelected === 3) {price += D4D3Price;}
-                            if(endDivisionValueSelected === 2) {price += D4D3Price + D3D2Price;}
-                            if(endDivisionValueSelected === 1) {price += D4D3Price + D3D2Price + D2D1Price;}
+                        switch(endDivisionValueSelected){
+                            case 4:{
+                                price += 0;
+                                break;
+                            }
+                            case 3:{
+                                price += D4D3Price;
+                                break;
+                            }
+                            case 2:{
+                                price += D4D3Price + D3D2Price;
+                            }
+                            case 1:{
+                                price += D4D3Price + D3D2Price + D2D1Price;
+                            }
                         }
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 7:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
-                        price += PlatinumDivPromoPrice + (3 * PlatinumDivPrice);
+                        price = GoldDivPromoPrice + ((startDivisionValueSelected - 1) * GoldDivPrice)
+                        price += PlatinumDivPromoPrice + (PlatinumDivPrice * 3);
                         price += D4D3Price + D3D2Price + D2D1Price;
                         price += MasterPrice;
+
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
-                        
-                        document.getElementById("endDivisionSelectValue").style.display = "none";
-
                         return price;
                     }
                 }
-                break;
             }
             case 5:{
                 switch(endDivisionTypeSelected){
                     case 5:{
-                        if(endDivisionValueSelected != 1){
-                            price += (endDivisionValueSelected - 4) * PlatinumDivPrice;
-                        }
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
+                        price = (startDivisionValueSelected - endDivisionValueSelected) * PlatinumDivPrice;
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 6:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
-                        price += PlatinumDivPromoPrice + (3 * PlatinumDivPrice);
+                        price = PlatinumDivPromoPrice + ((startDivisionValueSelected - 1) * PlatinumDivPrice)
+                        price += PlatinumDivPromoPrice + (PlatinumDivPrice * 3);
 
-                        if(endDivisionValueSelected != 4){
-                            if(endDivisionValueSelected === 3) {price += D4D3Price;}
-                            if(endDivisionValueSelected === 2) {price += D4D3Price + D3D2Price;}
-                            if(endDivisionValueSelected === 1) {price += D4D3Price + D3D2Price + D2D1Price;}
+                        switch(endDivisionValueSelected){
+                            case 4:{
+                                price += 0;
+                                break;
+                            }
+                            case 3:{
+                                price += D4D3Price;
+                                break;
+                            }
+                            case 2:{
+                                price += D4D3Price + D3D2Price;
+                            }
+                            case 1:{
+                                price += D4D3Price + D3D2Price + D2D1Price;
+                            }
                         }
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 7:{
-                        price = IronDivPromoPrice + ((startDivisionValueSelected - 1) * IronDivPrice);
-                        price += BronzeDivPromoPrice + (3 * BronzeDivPrice);
-                        price += SilverDivPromoPrice + (3 * SilverDivPrice);
-                        price += GoldDivPromoPrice + (3 * GoldDivPrice);
-                        price += PlatinumDivPromoPrice + (3 * PlatinumDivPrice);
+                        price = PlatinumDivPromoPrice + ((startDivisionValueSelected - 1) * PlatinumDivPrice)
                         price += D4D3Price + D3D2Price + D2D1Price;
                         price += MasterPrice;
+
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-
                         PriceDisplay.innerHTML = price + " ZŁ";
-                        document.getElementById("endDivisionSelectValue").style.display = "none";
-
                         return price;
                     }
                 }
-                break;
             }
             case 6:{
                 switch(endDivisionTypeSelected){
                     case 6:{
-                        if(endDivisionValueSelected != 4){
-                            if(endDivisionValueSelected === 3) {price += D4D3Price;}
-                            if(endDivisionValueSelected === 2) {price += D4D3Price + D3D2Price;}
-                            if(endDivisionValueSelected === 1) {price += D4D3Price + D3D2Price + D2D1Price;}
+                        switch(endDivisionValueSelected){
+                            case 4:{
+                                price = 0;
+                                break;
+                            }
+                            case 3:{
+                                price = D4D3Price;
+                                break;
+                            }
+                            case 2:{
+                                price = D4D3Price + D3D2Price;
+                                break;
+                            }
+                            case 1:{
+                                price = D4D3Price + D3D2Price + D2D1Price;
+                                break;
+                            }
                         }
+
                         if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
-                        
                         PriceDisplay.innerHTML = price + " ZŁ";
                         return price;
                     }
                     case 7:{
+                        switch(startDivisionValueSelected){
+                            case 4:{
+                                price = D4D3Price + D3D2Price + D2D1Price;
+                                break;
+                            }
+                            case 3:{
+                                price = D3D2Price + D2D1Price;
+                                break;
+                            }
+                            case 2:{
+                                price = D2D1Price;
+                                break;
+                            }
+                            case 1:{
+                                price = 0;
+                                break;
+                            }
+                        }
                         price += MasterPrice;
-                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
 
+                        if(ifLessLP.checked == true){price += Math.round((price * LessLPModifier / 100));}
                         PriceDisplay.innerHTML = price + " ZŁ";
-                        document.getElementById("endDivisionSelectValue").style.display = "none";
                         return price;
                     }
                 }
-                break;
             }
             case 7:{
-                if(startDivisionTypeSelected == 7){
-                    document.getElementById("startDivisionSelectValue").style.display = "none";
-                }
-            
-                if(endDivisionTypeSelected == 7){
-                    document.getElementById("endDivisionSelectValue").style.display = "none";
-                }
+                PriceDisplay.innerHTML = 0 + " ZŁ";
+                return 0;
             }
-        }
 
-        
+        }
     }
 }
 
