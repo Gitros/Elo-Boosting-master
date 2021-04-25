@@ -1797,7 +1797,8 @@ button.bg-black:hover {
   text-transform: uppercase !important;
 }
 .text-white {
-  color: #fff !important;
+  text-align: center;
+  color: rgb(37, 112, 224) !important;
 }
 .text-primary {
   color: #64a19d !important;
@@ -1824,10 +1825,13 @@ a.text-black:hover {
   color: #212529 !important;
 }
 .text-black-50 {
-  color: rgba(0, 0, 0, 0.5) !important;
+  color: rgba(40, 117, 206, 0.5) !important;
+}
+.rules {
+  text-align: left;
 }
 .text-white-50 {
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: rgb(219, 210, 210) !important;
 }
 @media print {
   *,
@@ -2007,22 +2011,21 @@ body {
   }
 }
 .about-section {
-  height: 40%;
-  min-height: 50vh;
-  padding: 15rem;
-  background-image: url(../assets/img/tloabout.png);
-  background-repeat: no-repeat;
+  height: 20%;
+  min-height: 40vh;
+  padding: 4rem;
+  background-color: white;
 }
 .about-section h2 {
   font-size: 3rem;
-  font-weight: 700;
+  font-weight: 500;
 }
 .about-section p {
-  height: 40%;
+  height: 30%;
   text-align: left;
-  padding: 3em 3em;
-  margin-bottom: 5rem;
-  font-size: 1.5rem;
+  padding: 2em 2em;
+  margin-bottom: 3rem;
+  font-size: 1rem;
 }
 .projects-section {
   padding: 10rem 0;
