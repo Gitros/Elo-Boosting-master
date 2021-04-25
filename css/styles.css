@@ -2164,7 +2164,7 @@ body {
   font-weight: 600;
 }
 .elo_boosting_form select {
-  background-color: #1d29cebb;
+  background-color: #2843bbbb;
   border: unset;
   padding: 0.5em;
   color: #fff;
@@ -2190,7 +2190,7 @@ body {
 }
 .elo_boosting_form option:hover {
   outline: unset;
-  background-color: #195792;
+  background-color: #2843bbbb;
 }
 .elo_boosting_form option:checked {
   background-color: #291dcebb;
@@ -2215,7 +2215,7 @@ body {
 }
 .elo_boosting_form .button_box button {
   padding: 0.5em 4em;
-  background-color: rgba(38, 93, 175, 0.788);
+  background-color: #2843bbbb;
   color: #fff;
   border: unset;
   font-size: 1.1rem;
@@ -2225,7 +2225,7 @@ body {
   transition: 0.5s background-color;
 }
 .elo_boosting_form .button_box button:hover {
-  background-color: #2d2accbb;
+  background-color: #2843bbbb;
 }
 .elo_boosting_form .button_box button:focus {
   outline: unset;
