@@ -991,13 +991,13 @@ small {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #64a19d;
+  color: #2892da;
   background-color: #fff;
   border: 1px solid #dee2e6;
 }
 .page-link:hover {
   z-index: 2;
-  color: #467370;
+  color: #;
   text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
@@ -1879,11 +1879,14 @@ body {
 #mainNav .navbar-toggler {
   font-size: 80%;
   padding: 0.75rem;
-  color: #64a19d;
-  border: 1px solid #64a19d;
+  color: #2892da;
+  border: 1px solid #2892da;
 }
 #mainNav .navbar-toggler:focus {
   outline: 0;
+}
+.mail {
+  color: #2892da;
 }
 #mainNav .navbar-brand {
   color: #000;
@@ -1935,10 +1938,10 @@ body {
     border-bottom: 0.25rem solid transparent;
   }
   #mainNav.navbar-shrink .nav-link:hover {
-    color: #64a19d;
+    color: #2892da;
   }
   #mainNav.navbar-shrink .nav-link:active {
-    color: #467370;
+    color: #2892da;
   }
 }
 .btn {
@@ -2049,7 +2052,7 @@ body {
 }
 .contact-section .card {
   border: 0;
-  border-bottom: 0.25rem solid #64a19d;
+  border-bottom: 0.25rem solid #2892da;
 }
 .contact-section .card h4 {
   font-size: 0.8rem;
@@ -2060,7 +2063,7 @@ body {
   letter-spacing: 0.15rem;
 }
 .contact-section .card hr {
-  border-color: #64a19d;
+  border-color: #2892da;
   border-width: 0.25rem;
   width: 3rem;
 }
